@@ -1,20 +1,31 @@
+// static은 클래스 객체를 통해서만 접근 가능
+// static이 아닌 것은 인스턴스를 통해서만 접근 가능
 class Uploader {
-  testText = "initial word";
+  static staticText = "static word";
+  static #verb = "a";
+  instanceText = "instance word";
 
   static {
-    this.testText = "hello world";
+    this.staticText = "hello world";
   }
 
   static staticPrint() {
-    console.log(`this text is ${this.testText}`);
+    console.log(`this static text is ${this.#verb} ${this.staticText}`);
+    console.log(`this instance text is ${this.instanceText}`);
   }
 
   print() {
-    console.log(`this text is ${this.testText}`);
+    console.log(`this static text is ${this.staticText}`);
+    console.log(`this instance text is ${this.instanceText}`);
   }
 }
 
-Uploader.staticPrint(); // this static text is hello world
 const uploader = new Uploader();
-uploader.print(); // this text is initial word
-uploader.staticPrint(); // TypeError
+
+// this static text is a hello world
+// this instance text is undefined
+Uploader.staticPrint();
+
+// this static text is undefined
+// this instance text is instance word
+uploader.print();
